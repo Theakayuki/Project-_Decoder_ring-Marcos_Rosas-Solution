@@ -5,7 +5,7 @@
 
 const substitutionModule = (function () {
     // you can add any code you want within this function scope
-    // normal alphabet for reference
+    // normal alphabet for reference wish I could use a map but array just made more sense
     const alphabetNormal = [
         'a',
         'b',
@@ -35,17 +35,23 @@ const substitutionModule = (function () {
         'z',
     ];
     function substitution(input, alphabet, encode = true) {
-        // your solution code here
+        // check for missing alphabet or wrong length
         if (!alphabet || alphabet.length !== 26) return false;
         const inputArray = input.toLowerCase().split('');
         const alphabetArray = alphabet.toLowerCase().split('');
-        // check for duplicate letters in alphabet
+        // check for duplicate letters in alphabet using a set
         const alphabetSet = new Set(alphabetArray);
         if (alphabetSet.size !== 26) return false;
         // check if encoding or decoding
         if (encode) {
+            
+            // map over every letter in inputArray
             const outputArray = inputArray.map((letter) => {
+                
+                // check if the letter is in alphabet
                 if (alphabetArray.indexOf(letter) !== -1) {
+                    
+                    // return the letter in alphabetNormal
                     return alphabetArray[alphabetNormal.indexOf(letter)];
                 }
                 return letter;
@@ -53,8 +59,13 @@ const substitutionModule = (function () {
             return outputArray.join('');
         } else {
             
+            // map over every letter in inputArray
             const outputArray = inputArray.map((letter) => {
+                
+                // check if the letter is in alphabet
                 if (alphabet.indexOf(letter) !== -1) {
+                    
+                    // return the letter in alphabetNormal
                     return alphabetNormal[alphabetArray.indexOf(letter)];
                 }
                 return letter;
