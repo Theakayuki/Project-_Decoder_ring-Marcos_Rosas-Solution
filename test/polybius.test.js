@@ -36,4 +36,11 @@ describe("polybius", () => {
         const actual = polybius(input, encode = false);
         expect(actual).to.equal(expected);
     });
+
+    it('Should be ok with multiple spaces', () => {
+        const input = '44324234 4234 11 44513444';
+        const expected = 'th(i/j)s (i/j)s a test';
+        const actual = polybius(input, false);
+        expect(actual).to.equal(expected);
+    });
 });
