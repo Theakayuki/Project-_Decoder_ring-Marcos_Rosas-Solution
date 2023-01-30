@@ -5,7 +5,34 @@
 
 const caesarModule = (function () {
     // you can add any code you want within this function scope
-    const alphabet = {a:1, b:2, c:3, d:4, e:5, f:6, g:7, h:8, i:9, j:10, k:11, l:12, m:13, n:14, o:15, p:16, q:17, r:18, s:19, t:20, u:21, v:22, w:23, x:24, y:25, z:26};
+    const alphabet = {
+        a: 1,
+        b: 2,
+        c: 3,
+        d: 4,
+        e: 5,
+        f: 6,
+        g: 7,
+        h: 8,
+        i: 9,
+        j: 10,
+        k: 11,
+        l: 12,
+        m: 13,
+        n: 14,
+        o: 15,
+        p: 16,
+        q: 17,
+        r: 18,
+        s: 19,
+        t: 20,
+        u: 21,
+        v: 22,
+        w: 23,
+        x: 24,
+        y: 25,
+        z: 26,
+    };
     function caesar(string, shift, encode = true) {
         // Checks that shift is a number between -25 and 25, and not 0
         if (!shift || Math.abs(shift) > 25 || shift === 0) return false;
@@ -19,7 +46,13 @@ const caesarModule = (function () {
         // Maps through each letter in the input, and checks if it's a letter that can be encoded
         // If it can be encoded, it finds the new letter in the alphabet, and returns it
         // If it can't be encoded, it returns the original letter
-        const output = input.map((letter) => {
+        const output = input.map(encodingHelper);
+
+        // Joins the array into a string and returns it
+        return output.join('');
+
+        // Helper function that checks if a letter can be encoded, and returns the new letter
+        function encodingHelper(letter) {
             if (alphabet[letter]) {
                 let newLetter = alphabet[letter] + shift;
                 // Checks if the new letter is outside the alphabet, and adjusts it if it is
@@ -29,11 +62,11 @@ const caesarModule = (function () {
                 return Object.keys(alphabet)[newLetter - 1];
             }
             return letter;
-        });
-
-        // Joins the array into a string and returns it
-        return output.join('');
+        }
     }
+
+
+    caesar('thinkful', 3);
 
     return {
         caesar,
